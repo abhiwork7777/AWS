@@ -11,14 +11,6 @@ private_subnet_cidrs = ["10.0.3.0/24", "10.0.4.0/24"]
 public_subnet_availability_zones = ["us-east-1a", "us-east-1b"]
 private_subnet_availability_zones = ["us-east-1a", "us-east-1b"]
 
-subnet_tags = {
-  public = {
-    Name = "public-subnet"
-  }
-  private = {
-    Name = "private-subnet"
-  }
-}
 
 
 # Internet Gateway variables

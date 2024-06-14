@@ -5,7 +5,9 @@ resource "aws_subnet" "public" {
   availability_zone = var.public_subnet_availability_zones[count.index]
 
   tags = {
-    Name = "Subnet-Public : Public Subnet ${count.index + 1}"
+    Name                        = "Subnet-Public : Public Subnet ${count.index + 1}"
+    "kubernetes.io/cluster/eks" = "shared"
+    "kubernetes.io/role/elb"    = 1
   }
 }
 
@@ -16,6 +18,8 @@ resource "aws_subnet" "private" {
   availability_zone = var.private_subnet_availability_zones[count.index]
 
   tags = {
-    Name = "Subnet-Private : Private Subnet ${count.index + 1}"
+    Name                        = "Subnet-Private : Private Subnet ${count.index + 1}"
+    "kubernetes.io/cluster/eks" = "shared"
+    "kubernetes.io/role/internal-elb" = 1
   }
 }

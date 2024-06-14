@@ -14,6 +14,8 @@ resource "aws_route_table" "public" {
   }
 }
 
+
+# Associate route tables with public subnets
 resource "aws_route_table_association" "public_subnet_association" {
   count          = length(var.public_subnet_cidrs)
   depends_on     = [aws_subnet.public, aws_route_table.public]
@@ -21,11 +23,12 @@ resource "aws_route_table_association" "public_subnet_association" {
   route_table_id = aws_route_table.public[count.index].id
 }
 
+
+
 # Route Table for private subnets
 resource "aws_route_table" "private" {
   count      = length(var.private_subnet_cidrs)
   vpc_id     = aws_vpc.vpc.id
-  depends_on = [aws_nat_gateway.nat_gateway]
 
   tags = {
     Name        = "private-route-table-${count.index + 1}"
@@ -37,6 +40,7 @@ resource "aws_route_table" "private" {
     nat_gateway_id = aws_nat_gateway.nat_gateway[count.index].id
   }
 }
+
 
 # Route Table Association for private subnets
 resource "aws_route_table_association" "private_subnet_association" {

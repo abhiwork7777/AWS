@@ -37,12 +37,6 @@ variable "private_subnet_availability_zones" {
   description = "Availability zones for the private subnets"
 }
 
-variable "subnet_tags" {
-  type = map(object({
-    Name = string
-  }))
-  description = "Tags for the subnets"
-}
 
 ###############   FOR INTERNET GATEWAY   ################
 
