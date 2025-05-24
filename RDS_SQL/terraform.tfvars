@@ -1,0 +1,5 @@
+//instance_name = "my-rds-instance"
+//db_user       = "admin"
+//db_password   = "Password123"
+//db_name       = "mydb"
+//region        = "us-east-1"
