@@ -50,3 +50,9 @@ variable "instance_type" {
   type        = string
   default     = "t3.medium"
 }
+
+variable "region" {
+  description = "region"
+  type        = string
+  default     = "us-east-1"
+}
