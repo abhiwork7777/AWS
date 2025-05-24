@@ -2,7 +2,7 @@
 vpc_name        = "prod-eks-vpc"
 subnet_1_name   = "prod-eks-public-subnet-1"
 subnet_2_name   = "prod-eks-public-subnet-2"
-
+//region          = "us-east-1"
 //node_group_name = "prod-node-group"
 //desired_size    = 2
 //max_size        = 3
