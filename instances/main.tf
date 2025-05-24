@@ -33,6 +33,6 @@ resource "aws_instance" "main_ec2" {
   associate_public_ip_address = true
 
   tags = {
-    Name = "MainEC2"
+    Name = var.instance_name
   }
 }
