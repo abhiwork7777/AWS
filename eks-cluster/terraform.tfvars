@@ -1,4 +1,10 @@
-//cluster_name    = "my-eks-cluster"
-//vpc_name        = "my-eks-vpc"
-//subnet_1_name   = "my-eks-public-subnet-1"
-//subnet_2_name   = "my-eks-public-subnet-2"
+//cluster_name    = "prod-eks-cluster"
+vpc_name        = "prod-eks-vpc"
+subnet_1_name   = "prod-eks-public-subnet-1"
+subnet_2_name   = "prod-eks-public-subnet-2"
+
+//node_group_name = "prod-node-group"
+//desired_size    = 2
+//max_size        = 3
+//min_size        = 1
+//instance_type   = "t3.medium"
