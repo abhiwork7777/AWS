@@ -13,7 +13,9 @@ variable "subnet_cidr" {
 variable "instance_type" {
   default = "t2.micro"
 }
-
+variable "instance_name" {
+  default = "my-instance"
+}
 variable "ami_id" {
   description = "AMI ID to use for EC2 instance"
   default     = "ami-0c94855ba95c71c99" # Adjust for your region
