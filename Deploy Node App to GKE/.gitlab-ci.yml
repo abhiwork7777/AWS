@@ -1,0 +1,43 @@
+stages:
+  - deploy
+
+deploy_to_gke:
+  stage: deploy
+  image: google/cloud-sdk:slim
+  script:
+    - echo "$GCP_SA_KEY" > key.json
+
+    # Authenticate to GCP
+    - gcloud auth activate-service-account --key-file=key.json
+    - gcloud config set project "$GCP_PROJECT_ID"
+    - gcloud config set compute/zone "$GKE_ZONE"
+
+    # Get GKE credentials
+    - gcloud container clusters get-credentials "$GKE_CLUSTER_NAME"
+
+    # Optional: Install gke-gcloud-auth-plugin if needed
+    - gcloud components install gke-gcloud-auth-plugin --quiet
+
+    # Pull Docker image
+    - docker pull abhishekkumar1402/node-app:latest
+
+    # Deploy to GKE
+    - kubectl apply -f deployment.yaml
+
+    # Wait for External IP (optional)
+    - |
+      echo "Waiting for external IP..."
+      for i in {1..30}; do
+        external_ip=$(kubectl get svc todo-service -o jsonpath="{.status.loadBalancer.ingress[0].ip}")
+        if [ -n "$external_ip" ]; then
+          echo "App is deployed at: http://$external_ip"
+          break
+        fi
+        echo "Retrying in 20 seconds..."
+        sleep 20
+      done
+
+    - kubectl get pods -o wide
+
+  only:
+    - master
