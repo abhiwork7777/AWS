@@ -1,11 +1,28 @@
+# resource "aws_s3_bucket" "eks_bucket" {
+#   bucket = var.s3_bucket_name
+
+#   tags = {
+#     Name        = var.s3_bucket_name
+#     Environment = "dev"
+#   }
+# }
+# Generate a random suffix for the bucket name
+resource "random_string" "bucket_suffix" {
+  length  = 8
+  upper   = false
+  special = false
+}
+
+# Create an S3 bucket with a randomized name
 resource "aws_s3_bucket" "eks_bucket" {
-  bucket = var.s3_bucket_name
+  bucket = "${var.s3_bucket_name}-${random_string.bucket_suffix.result}"
 
   tags = {
-    Name        = var.s3_bucket_name
+    Name        = "${var.s3_bucket_name}-${random_string.bucket_suffix.result}"
     Environment = "dev"
   }
 }
+
 
 resource "aws_s3_bucket_versioning" "versioning" {
   bucket = aws_s3_bucket.eks_bucket.id
