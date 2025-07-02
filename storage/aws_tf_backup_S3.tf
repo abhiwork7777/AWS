@@ -1,6 +1,6 @@
 terraform {
   backend "gcs" {
-    bucket = "idp-cluster-tf-file"
+    bucket = "idp-devops-aws"
     prefix = "terraformAWSstorage.tfstate"
   }
 }
